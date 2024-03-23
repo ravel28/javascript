@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hello</title>
+    </head>
+
+    <style>
+        body{
+            display: flex;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            /*background-color: #E1D5E7;*/
+            background-color: white;
+        }
+
+        .home-button{
+            display: none;
+            position: absolute;
+            align-items: center;
+            padding: 5px;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .home-button > img{
+            width: 20px;
+            height: 20px;
+            padding-right: 5px;
+        }
+
+        .icon-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .icon-content > img{
+            width: 50%;
+            padding: 10px;
+            border-radius: 100%;
+            cursor : pointer;
+    		box-shadow: 0 0 10px black;
+        }
+
+        .content{
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content > .box-content{
+            display: flex;
+            width: 90%;
+            position: relative;
+            min-height: 500px;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .content > .box-content > .box-play{
+            width: 100%;
+            display: none;
+        }
+
+        .content > .box-content > .box-play > h1{
+            text-align: center;
+        }
+
+        .content > .box-content > .box-play > p{
+            text-align: justify;
+        }
+
+        /* home */
+        .content > .box-content > .box-play > .action-play{
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /*justify-content: space-between;*/
+        }
+
+        .content > .box-content > .box-play > .action-play > img{
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .content > .box-content > .box-play > .action-play > img:hover{
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+        }
+
+        /* stopwatch */
+        .content > .box-content > .box-play > .stopwatch{
+            width: 100%;
+            height: 50px;
+            display: flex;
+        }
+
+        .content > .box-content > .box-play > .stopwatch > .timer{
+            width: 320px;
+            padding-right: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content > .box-content > .box-play > .stopwatch > .act{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content > .box-content > .box-play > .stopwatch > .act > img{
+            width: 40px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px;
+            cursor: pointer;
+            background: none;
+        }
+
+        /* calculator */
+        .content > .box-content > .box-play > .calc{
+            margin: 0 auto;
+            width: 370px;
+            height: 410px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #D0D0D0;
+            background-color: grey;
+            display: block;
+            padding-top: 10px;
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(4, 87px);
+            grid-auto-rows: minmax(60px, auto);
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button > .keypad{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+        }
+        
+        .content > .box-content > .box-play > .calc > .container-button > .keypad:hover{
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button > .keypad:nth-child(1){
+            grid-column: span 4;
+            padding: 10px 0px;
+            margin-bottom: 30px;
+            background: none;
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button > .keypad:nth-child(2){
+            grid-column: span 2;
+            background-color: red;
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button > .keypad:nth-child(16){
+            grid-row: span 2;
+            background-color: blue;
+        }
+
+        .content > .box-content > .box-play > .calc > .container-button > .keypad > input{
+            margin: 0 auto;
+            height: 30px;
+            width: 95%;
+            padding: 7px 3px;
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+            font-size: 20px;
+        }
+
+        .content > .box-content > .box-play > .calc > input:focus{
+            outline: none;
+        }
+
+        /* date */
+        .content > .box-content > .box-play > .calendar{
+            margin: 0 auto;
+            width: 250px;
+            height: 300px;
+            border: 1px solid
+        }
+
+        .content > .box-content > .box-play > .calendar > .header-calendar{
+            width: 100%;
+            height: 60px;
+            background-color: red;
+        }
+
+        .content > .box-content > .box-play > .calendar > .content-calendar{
+            width: 100%;
+            height: 200px;
+            padding-top: 40px;
+            background-color: #E6E6E6;
+            text-align: center;
+        }
+
+        .content > .box-content > .box-play > .calendar > .content-calendar > span:nth-child(1){
+            margin: 0 auto;
+            font-size: 80px;
+        }
+
+        @media (max-width:800px){
+            body{
+                position: relative;
+            }
+
+            .home-button{
+                display: flex;
+            }
+
+            .icon-content{
+                display: none;
+            }
+
+            .content{ 
+                width: 100%;
+            }
+
+            /* stopwatch */
+            .content > .box-content > .box-play > .stopwatch{
+                padding-bottom: 50%;
+            }
+
+            .content > .box-content > .box-play > .stopwatch > .timer{
+                width: 200px;
+                padding-right: 25px;
+            }
+
+            /* Calc */
+            .content > .box-content > .box-play > .calc{
+                width: 300px;
+                height: 320px;
+            }
+
+            .content > .box-content > .box-play > .calc > .container-button{
+                grid-template-columns: repeat(4, 70px);
+                grid-auto-rows: minmax(42px, auto);
+            }
+        }
+    </style>
+
+    <body>
+        <div class="icon-content">
+            <img src="icons/house-chimney-solid.svg" onclick="play_menu('home')">
+        </div>
+        <div class="content">
+            <div class="box-content">
+
+                <div class="box-play">
+                    <h1>Hello everyone</h1>
+                    <p>
+                        Halaman ini adalah halaman yang mempunyai fitur aplikasi yang menggunakan javascript berbasis website
+                         yang bertujuan untuk gabut saja oleh developer. Silahkan pilih fitur aplikasi yang sudah tersedia, jika ingin 
+                         memainkan menu lain silahkan klik logo besar yang berada di samping (jika dibuka di dekstop) atau refresh kembali 
+						 halaman ini lalu pilih menu yang ingin dimainkan. Have fun :).
+                    </p>
+                    <div class="action-play">
+                        <img src="icons/stopwatch-solid.svg" class='act-play-image' onclick="play_menu('stopwatch')">
+                        <img src="icons/calculator-solid.svg" class='act-play-image' onclick="play_menu('calc')">
+                        <img src="icons/calendar-regular.svg" class='act-play-image' onclick="play_menu('date')">
+                    </div>
+                </div>
+
+                <div class="box-play">
+                    <h1>Stopwatch</h1>
+                    <div class="stopwatch">
+                        <div class="timer"><h3></h3></div>
+                        <div class="act">
+                            <img src="icons/play-solid.svg" class='play' onclick="role_play_stopwatch('play')">
+                            <img src="icons/pause-solid.svg" class='pause' onclick="role_play_stopwatch('pause')">
+                            <img src="icons/circle-stop-regular.svg" class='reload' onclick="role_play_stopwatch('restart')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-play">
+                    <h1>Calculator</h1>
+                    <div class="calc">
+                        <div class="container-button">
+                            <div class="keypad"><input type="text" value='0' readonly></div>
+                            <div class="keypad" onclick="calc('clear')">C</div>
+                            <div class="keypad">ON</div>
+                            <div class="keypad" onclick="calc('bagi')">/</div>
+                            <div class="keypad" onclick="calc('angka',1)">1</div>
+                            <div class="keypad" onclick="calc('angka',2)">2</div>
+                            <div class="keypad" onclick="calc('angka',3)">3</div>
+                            <div class="keypad" onclick="calc('kali')">x</div>
+                            <div class="keypad" onclick="calc('angka',4)">4</div>
+                            <div class="keypad" onclick="calc('angka',5)">5</div>
+                            <div class="keypad" onclick="calc('angka',6)">6</div>
+                            <div class="keypad" onclick="calc('min')">-</div>
+                            <div class="keypad" onclick="calc('angka',7)">7</div>
+                            <div class="keypad" onclick="calc('angka',8)">8</div>
+                            <div class="keypad" onclick="calc('angka',9)">9</div>
+                            <div class="keypad" onclick="calc('plus')">+</div>
+                            <div class="keypad" onclick="calc('angka',0)">0</div>
+                            <div class="keypad">,</div>
+                            <div class="keypad" onclick="calc('hasil')">=</div>
+                        </div>
+                    </div>
+                </div>
+				
+				<div class="box-play">
+                    <h1>Kalendar</h1>
+                    <div class="calendar">
+                        <div class="header-calendar"></div>
+                        <div class="content-calendar">
+                            <span id='dateJs'></span><br>
+                            <span id="monthJs"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        //homepage deklarasi js
+        var menu = document.getElementsByClassName('box-play');
+        var fitur = document.getElementsByClassName('act-play-image');
+        menu[0].style.display='block';
+
+        function play_menu(play){
+            for(i=0; i<menu.length; i++){
+                menu[i].style.display='none';
+            }
+            if(play=='home'){
+                menu[0].style.display='block';
+            }else if(play=='stopwatch'){
+                menu[1].style.display='block';
+            }else if(play=='calc'){
+                menu[2].style.display='block';
+            }else if(play=='date'){
+				menu[3].style.display='block';
+			}
+        }
+
+        //stopwatch javascript
+        var Ms = set(0);
+        var J = set(0);
+        var M = set(0);
+        var D = set(0);
+        var Police = true;
+        var test=null;
+        document.querySelector('.pause').style.display='none';
+        document.querySelector('.reload').style.display='none';
+        document.querySelector('.timer h3').innerHTML=J+':'+M+':'+D+':'+Ms;
+
+        function set(e){
+            if(e<10){
+                e='0'+e;
+            }
+            return e;
+        }
+		
+		function role_play_stopwatch(action){
+            if(action=='play'){
+                test=setInterval(() => {
+                    Ms++;
+                    if (Ms>99){
+                        D++;
+                        D=set(D);
+                        Ms=0;
+                    }
+                    if(D>59){
+                        M++;
+                        M=set(M);
+                        D=0;
+                        D=set(D);
+                    }
+                    if(M>59){
+                        J++;
+                        J=set(J);
+                        M=0;
+                    }
+                    if(J>23){
+                        Ms=0;
+                        D=0;
+                        M=0;
+                        J=0;
+                    }
+                    ms=set(Ms);
+                    document.querySelector('.timer h3').innerHTML=J+':'+M+':'+D+':'+ms;
+                }, 10);
+                document.querySelector('.play').style.display='none';
+                document.querySelector('.pause').style.display='flex';
+                document.querySelector('.reload').style.display='none';
+                return test;
+            }else if(action=='pause'){
+                clearInterval(test);
+                document.querySelector('.play').style.display='flex';
+                document.querySelector('.pause').style.display='none';
+                document.querySelector('.reload').style.display='flex';
+            }else if(action=='restart'){
+                Ms = set(0);
+                J = set(0);
+                M = set(0);
+                D = set(0);
+                document.querySelector('.timer h3').innerHTML=J+':'+M+':'+D+':'+Ms;
+                document.querySelector('.play').style.display='flex';
+                document.querySelector('.pause').style.display='none';
+                document.querySelector('.reload').style.display='none';
+            }
+		} 
+
+        //calculator javascript
+        var StartCalc=false;
+        var arimatika=null;
+        var perintah=null;
+        var hasil=null;
+
+        function calc(act,nilai=''){
+            var monitor = document.querySelector('.keypad input');
+            var angka = parseInt(monitor.value);
+            if(act=='angka'){
+                if(perintah==null){
+                    if(monitor.value==0){
+                        monitor.value=nilai;
+                    }else{
+                        monitor.value=monitor.value+=nilai;
+                    }
+                }else{
+                    if(perintah=='selesai'){
+                        hasil=0;
+                    }
+                    monitor.value=nilai;
+                    perintah=null;
+                }
+            }else if(act=='clear'){
+                monitor.value=0;
+                hasil=null;
+            }else if(act=='plus'){
+                if(perintah!==act){
+                    arimatika=act;
+                    if(perintah=='selesai'){
+                        hasil=angka;
+                    }else{
+						if(hasil!=null){
+							hasil=hasil+angka;							
+						}else{
+							hasil=0+angka;
+						}
+                    }
+                    if(StartCalc==false){
+                        monitor.value=angka;
+                        StartCalc=true;
+                    }else{
+                        monitor.value=hasil;
+                    }
+                    perintah=act;
+                }
+            }else if(act=='min'){
+                 if(perintah!==act){
+                    arimatika=act;
+                    if(perintah=='selesai'){
+                        hasil=angka;
+                    }else{
+						if(hasil!=null){
+							hasil=hasil-angka;
+						}else{
+							hasil=0+angka;
+						}
+                    }
+                    if(StartCalc==false){
+                        monitor.value=angka;
+                        StartCalc=true;
+                    }else{
+                        monitor.value=hasil;
+                    }
+                    perintah=act;
+                }
+            }else if(act=='kali'){
+				if(perintah!==act){
+                    arimatika=act;
+                    if(perintah=='selesai'){
+                        hasil=angka;
+                    }else{
+						if(hasil!=null){
+							hasil=hasil*angka;
+						}else{
+							hasil=0+angka;
+						}
+                    }
+                    if(StartCalc==false){
+                        monitor.value=angka;
+                        StartCalc=true;
+                    }else{
+                        monitor.value=hasil;
+                    }
+                    perintah=act;
+                }
+			}else if(act=='bagi'){
+				if(perintah!==act){
+                    arimatika=act;
+                    if(perintah=='selesai'){
+                        hasil=angka;
+                    }else{
+						if(hasil!=null){
+							hasil=hasil/angka;
+						}else{
+							hasil=0+angka;
+						}
+                    }
+                    if(StartCalc==false){
+                        monitor.value=angka;
+                        StartCalc=true;
+                    }else{
+                        monitor.value=hasil;
+                    }
+                    perintah=act;
+                }
+			}else if(act=='hasil'){
+                if(arimatika=='plus' && perintah!==arimatika){
+					hasil=hasil+parseInt(monitor.value);
+                }else if(arimatika=='min' && perintah!==arimatika){
+					hasil=hasil-parseInt(monitor.value);
+				}else if(arimatika=='kali' && perintah!==arimatika){
+					hasil=hasil*parseInt(monitor.value);
+				}else if(arimatika=='bagi'){
+					hasil=hasil/parseInt(monitor.value);
+				}
+                monitor.value=hasil;
+                perintah='selesai';
+            }
+        }
+
+        //Date by javascript
+        // var datejS = document.querySelector('#datejS');
+        var datejS = document.getElementById('dateJs');
+        var monthJs = document.getElementById('monthJs');
+
+        var todayDate = new Date().getDate();
+        var todayMonth = new Date().getMonth();
+        var date = new Date(0, todayMonth);
+        var monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+        datejS.innerHTML = todayDate;
+        monthJs.innerHTML = monthName;
+    </script>
+</html>
